@@ -1,9 +1,8 @@
-import { DrawingObject, XandY } from '../type';
 import { getAbs } from '../lib/get-absolute';
+import { ConstructorByType, DrawingObject, XandY } from '../type';
 
 export class FixedAccelerationSquare implements DrawingObject {
-  private x: number;
-  private y: number;
+  private position: XandY;
   private velocity: XandY;
   private acceleration: XandY;
   private color: string;
@@ -15,19 +14,10 @@ export class FixedAccelerationSquare implements DrawingObject {
     initial,
     size,
     color,
-  }: {
-    acceleration: XandY;
-    initial: {
-      position: XandY;
-      speed: XandY;
-    };
-    size: XandY;
-    color: string;
-  }) {
+  }: ConstructorByType['fixed-acceleration']) {
     this.acceleration = acceleration;
     this.size = size;
-    this.x = initial.position[0];
-    this.y = initial.position[1];
+    this.position = initial.position;
     this.velocity = initial.speed;
     this.color = color;
   }
@@ -41,8 +31,8 @@ export class FixedAccelerationSquare implements DrawingObject {
         timeDiff * this.acceleration[0] + oldSpeedX,
         timeDiff * this.acceleration[1] + oldSpeedY,
       ];
-      this.x += 0.5 * (this.velocity[0] + oldSpeedX) * timeDiff;
-      this.y += 0.5 * (this.velocity[1] + oldSpeedY) * timeDiff;
+      this.position[0] += 0.5 * (this.velocity[0] + oldSpeedX) * timeDiff;
+      this.position[1] += 0.5 * (this.velocity[1] + oldSpeedY) * timeDiff;
       this.lastRun = now;
     } else {
       this.lastRun = new Date();
@@ -55,8 +45,9 @@ export class FixedAccelerationSquare implements DrawingObject {
 
   render(ctx: CanvasRenderingContext2D) {
     ctx.fillStyle = this.color;
-    ctx.fillRect(this.x, this.y, this.size[0], this.size[1]);
+    const [x, y] = this.position;
+    ctx.fillRect(x, y, this.size[0], this.size[1]);
     ctx.font = '24px sans serif';
-    ctx.fillText(`${Math.round(getAbs(this.velocity))} m/s`, this.x, this.y);
+    ctx.fillText(`${Math.round(getAbs(this.velocity))} m/s`, x, y);
   }
 }

@@ -1,4 +1,4 @@
-import { DrawingObject } from '../type';
+import { DrawingObject, ConstructorByType } from '../type';
 
 export class Clock implements DrawingObject {
   private lastRun: Date | undefined;
@@ -8,7 +8,7 @@ export class Clock implements DrawingObject {
   private x: number;
   private y: number;
 
-  constructor({ font, color, x, y }) {
+  constructor({ font, color, x, y }: ConstructorByType['clock']) {
     this.font = font;
     this.color = color;
     this.x = x;
@@ -34,6 +34,6 @@ export class Clock implements DrawingObject {
     ctx.font = this.font;
     ctx.fillStyle = this.color;
     ctx.textAlign = 'center';
-    ctx.fillText(`${(this.msPassed / 1000).toFixed(2)}`, this.x, this.y);
+    ctx.fillText(`${(this.msPassed / 1000).toFixed(2)} s`, this.x, this.y);
   }
 }

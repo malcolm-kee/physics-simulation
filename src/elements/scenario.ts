@@ -3,14 +3,16 @@ import { DrawingObject } from '../type';
 export class Scenario {
   private objects: DrawingObject[];
   private _ctx: CanvasRenderingContext2D;
+  private _canvas: HTMLCanvasElement;
   private _width: number;
   private _height: number;
   private _gridLine: number;
   private _rafId: number;
 
-  constructor(ctx: CanvasRenderingContext2D, { width, height }, gridLine = 10) {
+  constructor(canvas: HTMLCanvasElement, { width, height }, gridLine = 10) {
     this.objects = [];
-    this._ctx = ctx;
+    this._canvas = canvas;
+    this._ctx = canvas.getContext('2d');
     this._width = width;
     this._height = height;
     this._gridLine = gridLine;

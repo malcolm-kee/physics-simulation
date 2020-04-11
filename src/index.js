@@ -9,7 +9,7 @@ const Playground = ({ isRunning }) => {
 
   React.useEffect(() => {
     if (canvasRef.current) {
-      setScenario(createScenario(canvasRef.current));
+      createScenario(canvasRef.current).then(setScenario);
     }
   }, []);
 
