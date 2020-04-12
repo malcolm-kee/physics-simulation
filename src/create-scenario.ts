@@ -2,12 +2,12 @@ import { Clock } from './elements/clock';
 import { FixedAccelerationSquare } from './elements/fixed-acceleration-square';
 import { FixedSpeedSquare } from './elements/fixed-speed-square';
 import { Scenario } from './elements/scenario';
-import { ConstructorEvent } from './type';
+import { ConstructorEvent } from './elements/type';
 
 export function createScenario(canvas: HTMLCanvasElement) {
   const w = canvas.width;
   const h = canvas.height;
-  const scenario = new Scenario(canvas, {
+  const scenario = new Scenario(canvas.getContext('2d'), {
     width: w,
     height: h,
   });

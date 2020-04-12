@@ -1,4 +1,4 @@
-import { ConstructorEvent } from './type';
+import { ConstructorEvent } from './elements/type';
 
 const worker = new Worker('./worker/worker.ts');
 

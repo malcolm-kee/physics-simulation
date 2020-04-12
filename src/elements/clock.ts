@@ -1,4 +1,4 @@
-import { DrawingObject, ConstructorByType } from '../type';
+import { CanvasContext, ConstructorByType, DrawingObject } from './type';
 
 export class Clock implements DrawingObject {
   private lastRun: Date | undefined;
@@ -30,7 +30,7 @@ export class Clock implements DrawingObject {
     this.lastRun = undefined;
   }
 
-  render(ctx: CanvasRenderingContext2D) {
+  render(ctx: CanvasContext) {
     ctx.font = this.font;
     ctx.fillStyle = this.color;
     ctx.textAlign = 'center';

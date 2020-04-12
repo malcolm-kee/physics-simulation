@@ -1,18 +1,16 @@
-import { DrawingObject } from '../type';
+import { CanvasContext, DrawingObject } from './type';
 
 export class Scenario {
   private objects: DrawingObject[];
-  private _ctx: CanvasRenderingContext2D;
-  private _canvas: HTMLCanvasElement;
+  private _ctx: CanvasContext;
   private _width: number;
   private _height: number;
   private _gridLine: number;
   private _rafId: number;
 
-  constructor(canvas: HTMLCanvasElement, { width, height }, gridLine = 10) {
+  constructor(ctx: CanvasContext, { width, height }, gridLine = 10) {
     this.objects = [];
-    this._canvas = canvas;
-    this._ctx = canvas.getContext('2d');
+    this._ctx = ctx;
     this._width = width;
     this._height = height;
     this._gridLine = gridLine;
@@ -48,11 +46,11 @@ export class Scenario {
   run(): void {
     this.tick();
 
-    this._rafId = window.requestAnimationFrame(() => this.run());
+    this._rafId = requestAnimationFrame(() => this.run());
   }
 
   pause(): void {
-    window.cancelAnimationFrame(this._rafId);
+    cancelAnimationFrame(this._rafId);
     this.objects.forEach((object) => object.pause());
   }
 }

@@ -1,7 +1,11 @@
+export type CanvasContext =
+  | CanvasRenderingContext2D
+  | OffscreenCanvasRenderingContext2D;
+
 export interface DrawingObject {
   nextFrame: () => void;
   pause: () => void;
-  render: (ctx: CanvasRenderingContext2D) => void;
+  render: (ctx: CanvasContext) => void;
 }
 
 export type XandY = [number, number];

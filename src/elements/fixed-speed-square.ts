@@ -1,5 +1,5 @@
 import { getAbs } from '../lib/get-absolute';
-import { ConstructorByType, DrawingObject, XandY } from '../type';
+import { CanvasContext, ConstructorByType, DrawingObject, XandY } from './type';
 
 export class FixedSpeedSquare implements DrawingObject {
   private width: number;
@@ -39,7 +39,7 @@ export class FixedSpeedSquare implements DrawingObject {
     this.lastRun = undefined;
   }
 
-  render(ctx: CanvasRenderingContext2D) {
+  render(ctx: CanvasContext) {
     ctx.fillStyle = this.color;
     const [x, y] = this.position;
     ctx.fillRect(x, y, this.width, this.height);
